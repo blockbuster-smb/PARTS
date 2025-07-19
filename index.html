@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Upload Photos - SKYMALL</title>
- <style>
+<style>
     body {
       margin: 0;
       padding: 20px;
@@ -293,34 +293,34 @@
   </style>
 </head>
 <body>
-  <div class="top-controls">
-    <select id="sortSelect" title="Фильтр" class="btn-top">
-      <option value="all">Все детали</option>
-      <option value="popular">Пос. взят. за 30 дней</option>
-      <option value="mostPopular">Популярные</option>
-      <option value="sortByQty">Остатки</option>
-    </select>
-    <button id="btnSearch" class="btn-top">Поиск</button>
-    <button onclick="resetSearch()" class="btn-top">Сбросить</button>
-    <button onclick="window.open('https://script.google.com/macros/s/AKfycbyXGtubHygKnygpEN6K2KWtrhfu4fWr0hKwuVf10JNvYjEF6VOj8wgKuSxc105wk0KE/exec', '_blank')" class="btn-top">Мануалы</button>
-    <button onclick="window.open('https://script.google.com/macros/s/AKfycbxAveNUBVSEFvafeY3OPUxNhiNniuG1sauFt5DGXeNcVzV250fbVTgI7XrRZ0PXwqslgg/exec', '_blank')" class="btn-top">Добавить деталь</button>
-  </div>
+<div class="top-controls">
+  <select id="sortSelect" title="Фильтр" class="btn-top">
+    <option value="all">Все детали</option>
+    <option value="popular">Пос. взят. за 30 дней</option>
+    <option value="mostPopular">Популярные</option>
+    <option value="sortByQty">Остатки</option>
+  </select>
+  <button id="btnSearch" class="btn-top">Поиск</button>
+  <button onclick="resetSearch()" class="btn-top">Сбросить</button>
+  <button onclick="window.open('https://script.google.com/macros/s/AKfycbyXGtubHygKnygpEN6K2KWtrhfu4fWr0hKwuVf10JNvYjEF6VOj8wgKuSxc105wk0KE/exec', '_blank')" class="btn-top">Мануалы</button>
+  <button onclick="window.open('https://script.google.com/macros/s/AKfycbxAveNUBVSEFvafeY3OPUxNhiNniuG1sauFt5DGXeNcVzV250fbVTgI7XrRZ0PXwqslgg/exec', '_blank')" class="btn-top">Добавить деталь</button>
+</div>
 
-  <div class="cards" id="cardsContainer"></div>
+<div class="cards" id="cardsContainer"></div>
 
-  <div class="pagination">
-    <button onclick="prevPage()" id="prevBtn" disabled>← Назад</button>
-    <div id="pageNumbers" style="display: flex; gap: 10px;"></div>
-    <button onclick="nextPage()" id="nextBtn">Вперёд →</button>
-  </div>
+<div class="pagination">
+  <button onclick="prevPage()" id="prevBtn" disabled>← Назад</button>
+  <div id="pageNumbers" style="display: flex; gap: 10px;"></div>
+  <button onclick="nextPage()" id="nextBtn">Вперёд →</button>
+</div>
 
-  <div id="modalOverlay" class="modal-overlay">
-    <div class="modal">
-      <div id="modalClose" class="modal-close">×</div>
-      <h3>История изменений</h3>
-      <pre id="modalContent"></pre>
-    </div>
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal">
+    <div id="modalClose" class="modal-close">×</div>
+    <h3>История изменений</h3>
+    <pre id="modalContent"></pre>
   </div>
+</div>
 
 <script>
   const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw2LCa0uWVjWNSAXk0RGH_BMA0Tun0q-Y8o4pZGu4-7FgjKtLQIui-A11deuhnOyj50FQ/exec';
