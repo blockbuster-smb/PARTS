@@ -303,14 +303,13 @@
   </div>
 
 <script>
-  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbymJWkjX_rFfXHG7aEvkdnmP9EwXaElU-rk2_rTujjmj81z727-I_flvKX7fTujiOQxiQ/exec';
+  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw2LCa0uWVjWNSAXk0RGH_BMA0Tun0q-Y8o4pZGu4-7FgjKtLQIui-A11deuhnOyj50FQ/exec';
 
   let allEntries = [];
   let currentEntries = [];
   let currentPage = 1;
   const cardsPerPage = 5;
 
-  // Универсальная функция GET-запроса
   async function apiGet(action, params = {}) {
     try {
       const url = new URL(API_BASE_URL);
@@ -336,7 +335,6 @@
     }
   }
 
-  // Универсальная функция POST-запроса
   async function apiPost(action, bodyParams = {}) {
     try {
       const formData = new URLSearchParams();
@@ -366,7 +364,6 @@
     }
   }
 
-  // Отрисовка карточек на странице
   function renderCards(entries) {
     const container = document.getElementById('cardsContainer');
     container.innerHTML = '';
@@ -382,18 +379,15 @@
       const card = document.createElement('div');
       card.className = 'card';
 
-      // Медиа блок (изображение или iframe)
       const mediaBlock = document.createElement('div');
       mediaBlock.className = 'media-block';
 
       if (entry.fileUrl && (entry.fileUrl.endsWith('.mp4') || entry.fileUrl.includes('youtube') || entry.fileUrl.includes('drive.google.com'))) {
-        // Для видео/видео файлов вставим iframe
         const iframe = document.createElement('iframe');
         iframe.src = entry.fileUrl;
         iframe.allowFullscreen = true;
         mediaBlock.appendChild(iframe);
       } else if (entry.fileUrl) {
-        // Для изображений
         const img = document.createElement('img');
         img.src = entry.fileUrl;
         img.alt = entry.partNumber;
@@ -402,7 +396,6 @@
         mediaBlock.textContent = 'Нет изображения';
       }
 
-      // Кнопка удаления (крестик)
       const btnRemove = document.createElement('div');
       btnRemove.className = 'icon remove';
       btnRemove.title = 'Удалить деталь';
@@ -425,17 +418,14 @@
 
       card.appendChild(mediaBlock);
 
-      // Показ номера детали и остатка
       const pill = document.createElement('div');
       pill.className = 'pill';
       pill.textContent = entry.partNumber + ' — Остаток: ' + entry.quantity;
       card.appendChild(pill);
 
-      // Управление количеством
       const controls = document.createElement('div');
       controls.className = 'controls';
 
-      // Кнопка "Добавить"
       const btnAdd = document.createElement('button');
       btnAdd.className = 'btn btn-add';
       btnAdd.textContent = '+ Добавить';
@@ -458,7 +448,6 @@
       };
       controls.appendChild(btnAdd);
 
-      // Кнопка "Взять"
       const btnTake = document.createElement('button');
       btnTake.className = 'btn btn-take';
       btnTake.textContent = 'Взять';
@@ -481,7 +470,6 @@
       };
       controls.appendChild(btnTake);
 
-      // Кнопка "История"
       const btnInfo = document.createElement('button');
       btnInfo.className = 'btn btn-info';
       btnInfo.textContent = 'i';
@@ -496,7 +484,6 @@
       };
       controls.appendChild(btnInfo);
 
-      // Текущий остаток в readonly input
       const inputQty = document.createElement('input');
       inputQty.type = 'text';
       inputQty.value = entry.quantity;
@@ -504,13 +491,12 @@
       controls.appendChild(inputQty);
 
       card.appendChild(controls);
-      document.getElementById('cardsContainer').appendChild(card);
+      container.appendChild(card);
     });
 
     renderPagination(entries.length);
   }
 
-  // Пагинация
   function renderPagination(totalItems) {
     const totalPages = Math.ceil(totalItems / cardsPerPage);
     document.getElementById('prevBtn').disabled = currentPage <= 1;
@@ -543,7 +529,6 @@
     }
   }
 
-  // Модалка для истории
   function showModal(content) {
     const overlay = document.getElementById('modalOverlay');
     const modalContent = document.getElementById('modalContent');
@@ -559,10 +544,9 @@
     }
   };
 
-  // Загрузка данных с сервера и обновление UI
   async function loadData() {
-    document.getElementById('cardsContainer').textContent = 'Загрузка...';
-    document.getElementById('error').textContent = '';
+    const container = document.getElementById('cardsContainer');
+    container.textContent = 'Загрузка...';
     const filter = document.getElementById('sortSelect').value;
     try {
       let entries;
@@ -585,12 +569,11 @@
       currentPage = 1;
       renderCards(currentEntries);
     } catch (e) {
-      document.getElementById('cardsContainer').textContent = '';
+      container.textContent = '';
       alert('Ошибка загрузки данных: ' + e.message);
     }
   }
 
-  // Сброс поиска (если будет)
   function resetSearch() {
     document.getElementById('sortSelect').value = 'all';
     loadData();
@@ -598,7 +581,6 @@
 
   document.getElementById('sortSelect').addEventListener('change', loadData);
 
-  // Кнопка Поиск - можно добавить свою реализацию поиска
   document.getElementById('btnSearch').addEventListener('click', () => {
     const term = prompt('Введите номер детали для поиска');
     if (!term) return;
@@ -607,7 +589,6 @@
     renderCards(currentEntries);
   });
 
-  // Инициализация
   loadData();
 </script>
 
